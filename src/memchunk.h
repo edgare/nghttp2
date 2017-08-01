@@ -47,6 +47,7 @@ struct iovec {
 
 #include "template.h"
 
+
 namespace nghttp2 {
 
 #define DEFAULT_WR_IOVCNT 16
@@ -64,7 +65,9 @@ template <size_t N> struct Memchunk {
   size_t left() const { return std::end(buf) - last; }
   void reset() { pos = last = std::begin(buf); }
   std::array<uint8_t, N> buf;
-  uint8_t *pos, *last;
+
+  typename std::array<uint8_t, N>::iterator pos;
+  typename std::array<uint8_t, N>::iterator last;
   Memchunk *knext;
   Memchunk *next;
   static const size_t size = N;

@@ -34,6 +34,14 @@
 #include <sys/socket.h>
 #endif // HAVE_SYS_SOCKET_H
 #ifdef _WIN32
+#ifndef WIN32_LEAN_AND_MEAN
+// fewer includes
+#define WIN32_LEAN_AND_MEAN
+#endif // WIN32_LEAN_AND_MEAN
+#ifndef NOMINMAX
+// disable min/max macros
+#define NOMINMAX
+#endif // NOMINMAX
 #include <ws2tcpip.h>
 #else // !_WIN32
 #include <sys/un.h>
