@@ -78,3 +78,14 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #cmakedefine HAVE_UNISTD_H 1
+
+#ifdef __cplusplus
+#if defined(_MSC_VER) && _MSC_VER < 1900
+#define _ALLOW_KEYWORD_MACROS
+#define constexpr
+#define noexcept throw()
+#define NGHTTTP_CONSTEXPR_OR_CONST const
+#else /* defined(_MSC_VER) && _MSC_VER < 1900 */
+#define NGHTTTP_CONSTEXPR_OR_CONST constexpr
+#endif /* defined(_MSC_VER) && _MSC_VER < 1900 */
+#endif /* __cplusplus */

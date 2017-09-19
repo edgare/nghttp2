@@ -105,7 +105,7 @@ int on_header_callback(nghttp2_session *session, const nghttp2_frame *frame,
     }
   // fall through
   default:
-    if (req.header_buffer_size() + namelen + valuelen > 64_k) {
+    if (req.header_buffer_size() + namelen + valuelen > 64 * 1024) {
       nghttp2_submit_rst_stream(session, NGHTTP2_FLAG_NONE, frame->hd.stream_id,
                                 NGHTTP2_INTERNAL_ERROR);
       break;

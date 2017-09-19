@@ -170,6 +170,9 @@ template <typename T> void dlist_delete_all(DList<T> &dl) {
   }
 }
 
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+
 // User-defined literals for K, M, and G (powers of 1024)
 
 constexpr unsigned long long operator"" _k(unsigned long long k) {
@@ -197,6 +200,8 @@ constexpr double operator"" _s(unsigned long long s) { return s; }
 
 // milliseconds
 constexpr double operator"" _ms(unsigned long long ms) { return ms / 1000.; }
+
+#endif
 
 // Returns a copy of NULL-terminated string [first, last).
 template <typename InputIt>

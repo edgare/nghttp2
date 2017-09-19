@@ -249,6 +249,7 @@ if(ENABLE_ASIO_LIB)
      ${NGHTTP2_ASIO_SOURCES}
      $<TARGET_OBJECTS:http-parser>
   )
+  target_compile_definitions(nghttp2_asio PUBLIC "-DBUILDING_NGHTTP2_ASIO")
   target_include_directories(nghttp2_asio PRIVATE
     ${OPENSSL_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}

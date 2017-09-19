@@ -321,6 +321,13 @@ if(CMAKE_C_COMPILER_ID MATCHES "MSVC")
     set(WARNCFLAGS    /WX)
     set(WARNCXXFLAGS  /WX)
   endif()
+
+  # Avoid some msvc warnings
+  # Windows header compatibility (0x0600 == Windows Vista)
+  add_definitions(-D_WIN32_WINNT=0x0600)
+  # Disable warnings on standard functions
+  add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS)
+  add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE -D_CRT_SECURE_NO_DEPRECATE)
 else()
   if(ENABLE_WERROR)
     extract_valid_c_flags(WARNCFLAGS    -Werror)

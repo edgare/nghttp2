@@ -207,7 +207,7 @@ int on_header_callback(nghttp2_session *session, const nghttp2_frame *frame,
     if (token == http2::HD__STATUS) {
       res.status_code(util::parse_uint(value, valuelen));
     } else {
-      if (res.header_buffer_size() + namelen + valuelen > 64_k) {
+      if (res.header_buffer_size() + namelen + valuelen > 64 * 1024) {
         nghttp2_submit_rst_stream(session, NGHTTP2_FLAG_NONE,
                                   frame->hd.stream_id, NGHTTP2_INTERNAL_ERROR);
         break;
@@ -253,7 +253,7 @@ int on_header_callback(nghttp2_session *session, const nghttp2_frame *frame,
       }
     // fall through
     default:
-      if (req.header_buffer_size() + namelen + valuelen > 64_k) {
+      if (req.header_buffer_size() + namelen + valuelen > 64 * 1024) {
         nghttp2_submit_rst_stream(session, NGHTTP2_FLAG_NONE,
                                   frame->hd.stream_id, NGHTTP2_INTERNAL_ERROR);
         break;
@@ -388,7 +388,7 @@ bool session_impl::setup_session() {
     return false;
   }
 
-  const uint32_t window_size = 256_m;
+  const uint32_t window_size = 256 * 1024 * 1024;
 
   std::array<nghttp2_settings_entry, 2> iv{
       {{NGHTTP2_SETTINGS_MAX_CONCURRENT_STREAMS, 100},

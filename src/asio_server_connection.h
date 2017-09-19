@@ -225,9 +225,9 @@ private:
   std::shared_ptr<http2_handler> handler_;
 
   /// Buffer for incoming data.
-  boost::array<uint8_t, 8_k> buffer_;
+  boost::array<uint8_t, 8 * 1024> buffer_;
 
-  boost::array<uint8_t, 64_k> outbuf_;
+  boost::array<uint8_t, 64 * 1024> outbuf_;
 
   boost::asio::deadline_timer deadline_;
   boost::posix_time::time_duration tls_handshake_timeout_;

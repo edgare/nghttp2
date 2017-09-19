@@ -113,7 +113,7 @@ static void deflate_hd(nghttp2_hd_deflater *deflater,
                        const std::vector<nghttp2_nv> &nva, size_t inputlen,
                        int seq) {
   ssize_t rv;
-  std::array<uint8_t, 64_k> buf;
+  std::array<uint8_t, 64 * 1024> buf;
 
   rv = nghttp2_hd_deflate_hd(deflater, buf.data(), buf.size(),
                              (nghttp2_nv *)nva.data(), nva.size());
@@ -383,8 +383,8 @@ constexpr static struct option long_options[] = {
 int main(int argc, char **argv) {
   char *end;
 
-  config.table_size = 4_k;
-  config.deflate_table_size = 4_k;
+  config.table_size = 4 * 1024;
+  config.deflate_table_size = 4 * 1024;
   config.http1text = 0;
   config.dump_header_table = 0;
   while (1) {

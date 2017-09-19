@@ -100,8 +100,8 @@ public:
   bool stopped() const;
 
 protected:
-  boost::array<uint8_t, 8_k> rb_;
-  boost::array<uint8_t, 64_k> wb_;
+  boost::array<uint8_t, 8 * 1024> rb_;
+  boost::array<uint8_t, 64 * 1024> wb_;
   std::size_t wblen_;
 
 private:

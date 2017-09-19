@@ -47,6 +47,11 @@ extern "C" {
 #include <sys/types.h>
 #include <stdarg.h>
 
+#if !defined(ssize_t) && defined(_MSC_VER) && _MSC_VER < 1900
+/* Define to `int' if <sys/types.h> does not define. */
+#define ssize_t int
+#endif /* !defined(ssize_t) && defined(_MSC_VER) && _MSC_VER < 1900 */
+
 #include <nghttp2/nghttp2ver.h>
 
 #ifdef NGHTTP2_STATICLIB

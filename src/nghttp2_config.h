@@ -29,4 +29,22 @@
 #include <config.h>
 #endif // HAVE_CONFIG_H
 
+#ifdef __cplusplus
+
+#if defined(_MSC_VER) && _MSC_VER < 1900
+
+#define _ALLOW_KEYWORD_MACROS
+#define constexpr
+#define noexcept throw()
+
+#define NGHTTTP_CONSTEXPR_OR_CONST const
+
+#else
+
+#define NGHTTTP_CONSTEXPR_OR_CONST constexpr
+
+#endif
+
+#endif
+
 #endif // NGHTTP2_CONFIG_H

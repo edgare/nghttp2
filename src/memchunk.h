@@ -428,7 +428,7 @@ template <typename Memchunk> struct PeekMemchunks {
   bool peeking;
 };
 
-using Memchunk16K = Memchunk<16_k>;
+using Memchunk16K = Memchunk<16 * 1024>;
 using MemchunkPool = Pool<Memchunk16K>;
 using DefaultMemchunks = Memchunks<Memchunk16K>;
 using DefaultPeekMemchunks = PeekMemchunks<Memchunk16K>;
