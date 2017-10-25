@@ -153,6 +153,9 @@ public:
   Http2Session *select_http2_session_with_affinity(
       const std::shared_ptr<DownstreamAddrGroup> &group, DownstreamAddr *addr);
 
+  uint32_t get_or_create_affinity_cookie(Downstream *downstream,
+                                         const StringRef &cookie_name);
+
   const UpstreamAddr *get_upstream_addr() const;
 
   void repeat_read_timer();

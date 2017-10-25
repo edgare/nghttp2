@@ -269,6 +269,8 @@ public:
   const Request &request() const { return req_; }
   Request &request() { return req_; }
 
+  uint32_t find_affinity_cookie(const StringRef &name);
+
   // Count number of crumbled cookies
   size_t count_crumble_request_cookie();
   // Crumbles (split cookie by ";") in request_headers_ and adds them
@@ -412,6 +414,9 @@ public:
 
   void set_accesslog_written(bool f);
 
+  void renew_affinity_cookie(uint32_t h);
+  uint32_t get_affinity_cookie_to_send() const;
+
   enum {
     EVENT_ERROR = 0x1,
     EVENT_TIMEOUT = 0x2,
@@ -474,6 +479,7 @@ private:
   int32_t downstream_stream_id_;
   // RST_STREAM error_code from downstream HTTP2 connection
   uint32_t response_rst_stream_error_code_;
+  uint32_t affinity_cookie_;
   // request state
   int request_state_;
   // response state
@@ -497,6 +503,7 @@ private:
   bool request_header_sent_;
   // true if access.log has been written.
   bool accesslog_written_;
+  bool new_affinity_cookie_;
 };
 
 } // namespace shrpx
