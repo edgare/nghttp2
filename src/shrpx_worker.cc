@@ -82,8 +82,8 @@ bool match_shared_downstream_addr(
   }
 
   if (lhs->affinity.type == AFFINITY_COOKIE &&
-      lhs->affinity.cookie.name != rhs->affinity.cookie.name &&
-      lhs->affinity.cookie.path != rhs->affinity.cookie.path) {
+      (lhs->affinity.cookie.name != rhs->affinity.cookie.name ||
+       lhs->affinity.cookie.path != rhs->affinity.cookie.path)) {
     return false;
   }
 

@@ -269,8 +269,6 @@ public:
   const Request &request() const { return req_; }
   Request &request() { return req_; }
 
-  uint32_t find_affinity_cookie(const StringRef &name);
-
   // Count number of crumbled cookies
   size_t count_crumble_request_cookie();
   // Crumbles (split cookie by ";") in request_headers_ and adds them
@@ -414,7 +412,16 @@ public:
 
   void set_accesslog_written(bool f);
 
+  // Finds affinity cookie from request header fields.  The name of
+  // cookie is given in |name|.  If an affinity cookie is found, it is
+  // assigned to a member function, and is returned.  If it is not
+  // found, or is malformed, returns 0.
+  uint32_t find_affinity_cookie(const StringRef &name);
+  // Set |h| as affinity cookie.
   void renew_affinity_cookie(uint32_t h);
+  // Returns affinity cookie to send.  If it does not need to be sent,
+  // for example, because the value is retrieved from a request header
+  // field, returns 0.
   uint32_t get_affinity_cookie_to_send() const;
 
   enum {
@@ -479,6 +486,7 @@ private:
   int32_t downstream_stream_id_;
   // RST_STREAM error_code from downstream HTTP2 connection
   uint32_t response_rst_stream_error_code_;
+  // An affinity cookie value.
   uint32_t affinity_cookie_;
   // request state
   int request_state_;
@@ -503,6 +511,7 @@ private:
   bool request_header_sent_;
   // true if access.log has been written.
   bool accesslog_written_;
+  // true if affinity cookie is generated for this request.
   bool new_affinity_cookie_;
 };
 

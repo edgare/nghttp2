@@ -152,9 +152,7 @@ template <size_t N> std::string format_hex(const std::array<uint8_t, N> &s) {
 
 StringRef format_hex(BlockAllocator &balloc, const StringRef &s);
 
-namespace {
-constexpr char LOWER_XDIGITS[] = "0123456789abcdef";
-} // namespace
+static constexpr char LOWER_XDIGITS[] = "0123456789abcdef";
 
 template <typename OutputIt>
 OutputIt format_hex(OutputIt it, const StringRef &s) {

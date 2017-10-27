@@ -947,9 +947,8 @@ uint32_t next_cycle(const WeightedPri &pri) {
 }
 } // namespace
 
-uint32_t
-ClientHandler::get_or_create_affinity_cookie(Downstream *downstream,
-                                             const StringRef &cookie_name) {
+uint32_t ClientHandler::get_affinity_cookie(Downstream *downstream,
+                                            const StringRef &cookie_name) {
   auto h = downstream->find_affinity_cookie(cookie_name);
   if (h) {
     return h;
@@ -1042,8 +1041,7 @@ ClientHandler::get_downstream_connection(int &err, Downstream *downstream) {
       hash = affinity_hash_;
       break;
     case AFFINITY_COOKIE:
-      hash = get_or_create_affinity_cookie(downstream,
-                                           shared_addr->affinity.cookie.name);
+      hash = get_affinity_cookie(downstream, shared_addr->affinity.cookie.name);
       break;
     default:
       assert(0);

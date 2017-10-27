@@ -153,8 +153,10 @@ public:
   Http2Session *select_http2_session_with_affinity(
       const std::shared_ptr<DownstreamAddrGroup> &group, DownstreamAddr *addr);
 
-  uint32_t get_or_create_affinity_cookie(Downstream *downstream,
-                                         const StringRef &cookie_name);
+  // Returns an affinity cookie value for |downstream|.  |cookie_name|
+  // is used to inspect cookie header field in request header fields.
+  uint32_t get_affinity_cookie(Downstream *downstream,
+                               const StringRef &cookie_name);
 
   const UpstreamAddr *get_upstream_addr() const;
 
