@@ -131,6 +131,8 @@ int main(int argc, char *argv[]) {
                    shrpx::test_shrpx_http_create_forwarded) ||
       !CU_add_test(pSuite, "http_create_via_header_value",
                    shrpx::test_shrpx_http_create_via_header_value) ||
+      !CU_add_test(pSuite, "http_create_affinity_cookie",
+                   shrpx::test_shrpx_http_create_affinity_cookie) ||
       !CU_add_test(pSuite, "router_match", shrpx::test_shrpx_router_match) ||
       !CU_add_test(pSuite, "router_match_wildcard",
                    shrpx::test_shrpx_router_match_wildcard) ||
